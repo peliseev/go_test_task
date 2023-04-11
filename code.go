@@ -11,18 +11,15 @@ import (
 )
 
 type queue struct {
-	mu    *sync.Mutex
 	items chan []string
 	empty chan struct{}
 }
 
 func newQueue() *queue {
-	mu := &sync.Mutex{}
 	items := make(chan []string, 1)
 	empty := make(chan struct{}, 1)
 	empty <- struct{}{}
 	return &queue{
-		mu:    mu,
 		items: items,
 		empty: empty,
 	}
